@@ -1,8 +1,12 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.json",   // Inherit settings from the base tsconfig.json
+  "compilerOptions": {
+    "sourceMap": false,       // Disable source maps in production
+    "removeComments": true,    // Remove comments from compiled code
+  },
   "exclude": [
-    "node_modules",
-    "test",
-    "dist"
+    "**/*.spec.ts",     // Exclude test files from production build
+    "**/*.test.ts",
+    "dist/*",
   ]
 }

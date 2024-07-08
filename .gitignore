@@ -26,3 +26,7 @@ Thumbs.db
 
 # Firebase
 *-firebase-adminsdk-*.json
+functions/
+ui-debug.log
+firestore-debug.log
+firebase-debug.log

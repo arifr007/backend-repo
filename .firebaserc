@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "staging": "ebuddy-coding-test"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

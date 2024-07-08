@@ -1,24 +1,40 @@
 {
   "name": "backend-repo",
   "version": "1.0.0",
-  "description": "",
-  "main": "core/app.js",
+  "description": "A backend service for coding test at eBuddy Pte. Ltd.",
+  "main": "dist/core/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "ts-node core/app.ts",
-    "start": "ts-node dist/core/app.js",
-    "build": "tsc"
+    "dev": "nodemon --exec ts-node core/app.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "npm run build && firebase emulators:start --only functions",
+    "deploy": "npm run build && firebase deploy --only functions"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "firebase",
+    "express",
+    "backend",
+    "ebuddy"
+  ],
+  "author": "Arif R <r07.arif@gmail.com>",
+  "license": "MIT", 
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "@types/cors": "^2.8.17",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase": "^10.12.2",
+    "firebase-admin": "^12.2.0",
+    "firebase-functions": "^5.0.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "cpy-cli": "^5.0.0",
+    "nodemon": "^3.1.4",
+    "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

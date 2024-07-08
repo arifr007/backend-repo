@@ -1,24 +1,28 @@
 import express from 'express'
-import userRoutes from '../routes/userRoutes'
-import ApiError from '../entities/apiError'
-import { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
-import bodyParser from 'body-parser'
+import userRoutes from '../routes/userRoutes'
+import { handleErrorMiddleware } from '../middleware/errorMiddleware'
+import * as functions from 'firebase-functions'
 
-const app = express()
-const PORT = process.env.PORT || 3000
+// Initialize the Express application
+export const app = express()
 
+// Middleware to parse JSON bodies
+app.use(express.json())
+
+// Middleware to enable CORS (Cross-Origin Resource Sharing)
 app.use(cors())
-app.use(bodyParser.json())
 
+// Mount the user routes at the '/api' path
 app.use('/api/users', userRoutes)
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof ApiError) {
-    return res.status(err.statusCode).json({ error: err.message })
-  }
-})
+// Global error handling middleware
+app.use(handleErrorMiddleware)
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-});
+/**
+ * Initializes and exports the Firebase HTTP Cloud Function.
+ * 
+ * This function is triggered by HTTP requests sent to the Firebase-provided URL.
+ * It uses the Express application defined in './core/app' to handle these requests.
+ */
+exports.app = functions.https.onRequest(app);

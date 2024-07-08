@@ -1,21 +1,26 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "incremental": true,
-    "module": "CommonJS",
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "removeComments": true,
-    "sourceMap": true,
-    "target": "ESNext"
+    "target": "ES2020", // Target JavaScript version (e.g., ES5, ES6/ES2015, ES2023)
+    "module": "CommonJS", // Module system (e.g., commonjs, esnext, amd)
+    "lib": [
+      "ES2020",
+      "DOM"
+    ], // Include standard library definitions
+    "outDir": "./dist", // Output directory for compiled JavaScript files
+    "rootDir": "./", // Root directory for TypeScript source files
+    "strict": true, // Enable strict type-checking options
+    "esModuleInterop": true, // Enable interoperability between CommonJS and ES Modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true, // Skip type-checking of declaration files (e.g., node_modules)
+    "declaration": true // Generate declaration files (.d.ts) for type definitions
   },
+  "include": [
+    "**/*.ts",
+    "package.json"
+  ], // Include all TypeScript files within the root directory and package.json
   "exclude": [
     "node_modules",
     "dist"
-  ]
+  ] // Exclude node_modules from compilation
 }

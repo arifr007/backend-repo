@@ -1,10 +1,27 @@
-import express from 'express'
-import { fetchUserData, updateUserData } from '../controller/api'
-import authMiddleware from '../middleware/authMiddleware'
+import {
+    createUserData,
+    getUserData,
+    getUserDataById,
+    updateUserData,
+} from '../controller/api'
+import { Router } from 'express'
+import { authenticateRequest } from '../middleware/authMiddleware'
 
-const router = express.Router()
+// Create a new router instance
+const userRouter = Router()
 
-router.get('/:userId', authMiddleware, fetchUserData)
-router.put('/:userId', authMiddleware, updateUserData)
+// Route to fetch all users' data
+userRouter.get('/', getUserData)
 
-export default router
+// Route to update user data. Requires authentication.
+userRouter.put('/:userId', authenticateRequest, updateUserData)
+
+// Route to update user data. Requires authentication.
+userRouter.post('/', authenticateRequest, createUserData)
+
+// Route to fetch a single user's data by their ID
+userRouter.get('/:userId', getUserDataById)
+
+
+// Export the configured router
+export default userRouter;
